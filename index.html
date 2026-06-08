@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GBTI 게임 매뉴얼</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -13,7 +13,18 @@
       background-color: #2d5f38;
       font-family: 'Noto Sans KR', sans-serif;
       min-height: 100vh;
-      padding: 32px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 60px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* ─── Header ─── */
@@ -21,321 +32,104 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+      align-self: flex-start;
     }
     .header h1 {
       background-color: #f5efcc;
       color: #1e3a22;
       padding: 10px 28px;
       border-radius: 999px;
-      font-size: clamp(20px, 4vw, 30px);
+      font-size: clamp(18px, 5vw, 26px);
       font-weight: 900;
-      letter-spacing: -0.5px;
     }
 
     /* ─── Nav ─── */
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 24px;
+      justify-content: center;
+      width: 100%;
     }
     .nav-btn {
       background-color: #f5efcc;
       color: #1e3a22;
       border: none;
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.15s, transform 0.1s;
+      transition: background 0.15s;
     }
-    .nav-btn:hover { background-color: #f5e07a; }
+    .nav-btn:hover  { background-color: #f5e07a; }
     .nav-btn.active { background-color: #f0c430; }
 
-    /* ─── Card ─── */
+    /* ─── Image card ─── */
     .card {
-      background-color: #f5efcc;
-      border-radius: 24px;
-      padding: 28px 32px;
       display: none;
-      max-width: 860px;
+      width: 100%;
     }
     .card.active { display: block; }
 
-    /* ─── Card Header ─── */
-    .card-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      display: block;
     }
-    .card-head .tag {
-      background-color: #f0c430;
-      color: #1e3a22;
-      padding: 6px 22px;
-      border-radius: 999px;
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    /* ─── Steps (vertical) ─── */
-    .steps { display: flex; flex-direction: column; gap: 14px; }
-
-    .step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      background-color: #fdf8e2;
-      border-radius: 16px;
-      padding: 16px 18px;
-    }
-    .step-num {
-      background-color: #f0c430;
-      color: #1e3a22;
-      min-width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 17px;
-      flex-shrink: 0;
-    }
-    .step-body h3 { font-size: 15px; font-weight: 700; color: #1e3a22; margin-bottom: 5px; }
-    .step-body p  { font-size: 14px; color: #3a4a3a; line-height: 1.65; }
-    .step-body strong { color: #1e3a22; }
-
-    /* ─── QnA two-column ─── */
-    .qna-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-    @media (max-width: 580px) { .qna-grid { grid-template-columns: 1fr; } }
-
-    .qna-q {
-      background-color: #fdf8e2;
-      border-radius: 18px;
-      padding: 22px 18px;
-      font-size: clamp(22px, 4vw, 30px);
-      font-weight: 900;
-      color: #1e3a22;
-      line-height: 1.4;
-    }
-    .qna-a { display: flex; flex-direction: column; gap: 14px; }
-
-    .subtitle-tag {
-      background-color: #f0c430;
-      color: #1e3a22;
-      display: inline-block;
-      padding: 7px 20px;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
-
-    /* ─── Method label ─── */
-    .method-badge {
-      display: inline-block;
-      background-color: #2d5f38;
-      color: #f5efcc;
-      padding: 3px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    /* ─── Chat bubble example ─── */
-    .bubble {
-      background-color: #f0c430;
-      display: inline-block;
-      padding: 7px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #1e3a22;
-      margin: 6px 0 4px;
-      line-height: 1.5;
-    }
-
-    /* ─── Note box ─── */
-    .note {
-      background-color: #2d5f38;
-      color: #f5efcc;
-      padding: 14px 20px;
-      border-radius: 14px;
-      margin-top: 4px;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-    .note ul { list-style: none; padding: 0; }
-    .note ul li::before { content: "• "; font-weight: 700; }
   </style>
 </head>
 <body>
+  <div class="container">
 
-  <!-- Blob SVG (reusable inline) -->
-  <svg style="display:none">
-    <symbol id="blob" viewBox="0 0 100 100">
-      <path d="M50 8 C72 4,94 22,92 46 C90 68,72 93,50 93 C28 93,8 70,8 48 C8 26,28 12,50 8Z" fill="#5ab96b"/>
-      <circle cx="38" cy="46" r="7" fill="white"/>
-      <circle cx="62" cy="46" r="7" fill="white"/>
-      <circle cx="40" cy="47" r="3.5" fill="#1e3a22"/>
-      <circle cx="64" cy="47" r="3.5" fill="#1e3a22"/>
-      <circle cx="42" cy="44" r="1.5" fill="white"/>
-      <circle cx="66" cy="44" r="1.5" fill="white"/>
-      <circle cx="30" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
-      <circle cx="70" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
-      <path d="M39 63 Q50 73 61 63" stroke="#1e3a22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <circle cx="37" cy="20" r="4" fill="#f0c430"/>
-      <circle cx="63" cy="18" r="3" fill="#f0c430"/>
-    </symbol>
-  </svg>
-
-  <!-- Header -->
-  <div class="header">
-    <svg width="58" height="58"><use href="#blob"/></svg>
-    <h1>GBTI 게임 매뉴얼</h1>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav">
-    <button class="nav-btn active" onclick="show('server', this)">서버 입장 가이드</button>
-    <button class="nav-btn" onclick="show('lol', this)">롤 · 칼바 · 오버 · 발로 · 배그</button>
-    <button class="nav-btn" onclick="show('steam', this)">STEAM 게임</button>
-    <button class="nav-btn" onclick="show('thread', this)">스레드 만들기</button>
-  </nav>
-
-  <!-- ── 1. 서버 입장 가이드 ── -->
-  <div class="card active" id="card-server">
-    <div class="card-head">
-      <svg width="44" height="44"><use href="#blob"/></svg>
-      <span class="tag">서버 입장 가이드</span>
+    <!-- Header -->
+    <div class="header">
+      <svg width="52" height="52" viewBox="0 0 100 100">
+        <path d="M50 8 C72 4,94 22,92 46 C90 68,72 93,50 93 C28 93,8 70,8 48 C8 26,28 12,50 8Z" fill="#5ab96b"/>
+        <circle cx="38" cy="46" r="7" fill="white"/>
+        <circle cx="62" cy="46" r="7" fill="white"/>
+        <circle cx="40" cy="47" r="3.5" fill="#1e3a22"/>
+        <circle cx="64" cy="47" r="3.5" fill="#1e3a22"/>
+        <circle cx="42" cy="44" r="1.5" fill="white"/>
+        <circle cx="66" cy="44" r="1.5" fill="white"/>
+        <circle cx="30" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
+        <circle cx="70" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
+        <path d="M39 63 Q50 73 61 63" stroke="#1e3a22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="37" cy="20" r="4" fill="#f0c430"/>
+        <circle cx="63" cy="18" r="3" fill="#f0c430"/>
+      </svg>
+      <h1>GBTI 게임 매뉴얼</h1>
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h3>모든 채널 표시하기 체크</h3>
-          <p>서버 이름 클릭 → <strong>모든 채널 표시하기</strong>에 체크해 주세요.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h3>자기소개 채널에 소개 작성 ♡</h3>
-          <p><strong>#서버 · 자기소개</strong> 채널에서 자기소개를 작성해 주세요!</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ── 2. 롤·칼바·오버·발로·배그 ── -->
-  <div class="card" id="card-lol">
-    <div class="card-head">
-      <svg width="44" height="44"><use href="#blob"/></svg>
-      <span class="tag">QnA</span>
-    </div>
-    <div class="qna-grid">
-      <div class="qna-q">롤, 오버워치,<br>발로란트, 배그<br>하고싶어요!</div>
-      <div class="qna-a">
-        <div><span class="subtitle-tag">방법은 총 두가지가 있어요!</span></div>
+    <!-- Navigation -->
+    <nav class="nav">
+      <button class="nav-btn active" onclick="show('server', this)">서버 입장 가이드</button>
+      <button class="nav-btn" onclick="show('lol', this)">롤 · 칼바 · 오버 · 발로 · 배그</button>
+      <button class="nav-btn" onclick="show('steam', this)">STEAM 게임</button>
+      <button class="nav-btn" onclick="show('thread', this)">스레드 만들기</button>
+    </nav>
 
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <span class="method-badge">시간 예약</span>
-            <p><strong>게임명 - 시간</strong><br>주최자 - 인원</p>
-            <div class="bubble">칼바람 00시<br>낭구 1/5 선착순</div>
-            <p style="font-size:13px; margin-top:6px;">주최자를 제외한 인원은 <strong>선착순</strong>으로 모집합니다.</p>
-          </div>
-        </div>
+    <!-- Cards -->
+    <div class="card active" id="card-server">
+      <img src="server.jpg" alt="서버 입장 가이드" />
+    </div>
 
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <span class="method-badge">즉흥</span>
-            <p>디코 음성채팅방 생성 후<br><strong>게임명 - 시간</strong></p>
-            <div class="bubble">칼바람 1/5</div>
-            <p style="font-size:13px; margin-top:6px;">다음 참여자들은 인원을 <strong>갱신</strong>해 주세요!</p>
-          </div>
-        </div>
-      </div>
+    <div class="card" id="card-lol">
+      <img src="lol.png" alt="롤·칼바·오버워치·발로란트·배그 게임 모집" />
     </div>
-  </div>
 
-  <!-- ── 3. STEAM 게임 ── -->
-  <div class="card" id="card-steam">
-    <div class="card-head">
-      <svg width="44" height="44"><use href="#blob"/></svg>
-      <span class="tag">QnA</span>
+    <div class="card" id="card-steam">
+      <img src="steam.jpg" alt="STEAM 게임 투표 만들기" />
     </div>
-    <div class="qna-grid">
-      <div class="qna-q">STEAM 게임<br>하고싶어요!</div>
-      <div class="qna-a">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <h3>투표 채널 이동</h3>
-            <p>☰ 메뉴버튼 클릭 →
-               <strong>통계시판(PC)</strong> / <strong>투표(Mo)</strong> →
-               투표 탭 → 우측상단 <strong>연필 아이콘</strong> 클릭</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <h3>투표 작성</h3>
-            <p><strong>제목란:</strong> 게임명, 날짜 표기<br>
-               <strong>투표란:</strong> 최대인원, 특이사항 기재</p>
-          </div>
-        </div>
-        <div class="note">
-          <ul>
-            <li>투표 제작시 종료시간 <strong>'체크 해제'</strong> 필수!</li>
-            <li>댓글에 게임관련 정보(가격, 게임설명) 및 링크 넣어주면 모집이 용이합니다!</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ── 4. 스레드 만들기 ── -->
-  <div class="card" id="card-thread">
-    <div class="card-head">
-      <svg width="44" height="44"><use href="#blob"/></svg>
-      <span class="tag">스레드 만들기</span>
+    <div class="card" id="card-thread">
+      <img src="thread.png" alt="스레드 만들기" />
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h3>채팅 게임소통방 입장</h3>
-          <p><strong>#채팅 · 게임소통</strong> 채널에 입장하세요.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h3>언급할 인원들 태그 후 내용 입력</h3>
-          <p>함께 게임할 인원들을 <strong>@태그</strong>한 후 내용을 입력하세요.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h3>채팅 우클릭 후 '스레드 만들기' 클릭</h3>
-          <p>메시지에서 <strong>우클릭</strong> → <strong>'스레드 만들기'</strong>를 클릭하세요.</p>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <script>
