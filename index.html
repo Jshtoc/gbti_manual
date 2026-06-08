@@ -21,7 +21,7 @@
 
     .container {
       width: 100%;
-      max-width: 700px;
+      max-width: 1000px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -68,18 +68,89 @@
     .nav-btn:hover  { background-color: #f5e07a; }
     .nav-btn.active { background-color: #f0c430; }
 
-    /* ─── Image card ─── */
+    /* ─── Card ─── */
     .card {
       display: none;
       width: 100%;
     }
     .card.active { display: block; }
 
-    .card img {
+    /* ─── Image wrapper ─── */
+    .img-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* PC: 이미지 꽉 채움 */
+    .img-wrap img {
+      display: block;
       width: 100%;
       height: auto;
       border-radius: 20px;
-      display: block;
+    }
+
+    /* ─── 모바일: 가로 스크롤 ─── */
+    @media (max-width: 767px) {
+      .img-wrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        /* 스크롤바 숨김 */
+        scrollbar-width: none;
+      }
+      .img-wrap::-webkit-scrollbar { display: none; }
+
+      .img-wrap img {
+        width: auto;
+        min-width: 600px;
+        max-width: none;
+        height: auto;
+        border-radius: 0;
+      }
+    }
+
+    /* ─── 스크롤 힌트 (모바일 전용) ─── */
+    .scroll-hint {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .scroll-hint {
+        display: flex;
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 0, 0, 0.55);
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        pointer-events: none;
+        white-space: nowrap;
+        /* 좌우 흔들림 애니메이션 */
+        animation: hint-sway 1.4s ease-in-out infinite;
+        transition: opacity 0.4s ease;
+      }
+      .scroll-hint.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    @keyframes hint-sway {
+      0%   { transform: translateX(calc(-50% - 6px)); }
+      50%  { transform: translateX(calc(-50% + 6px)); }
+      100% { transform: translateX(calc(-50% - 6px)); }
+    }
+
+    .scroll-hint svg {
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -115,19 +186,63 @@
 
     <!-- Cards -->
     <div class="card active" id="card-server">
-      <img src="server.jpg" alt="서버 입장 가이드" />
+      <div class="img-wrap" id="wrap-server">
+        <img src="server.jpg" alt="서버 입장 가이드" />
+        <div class="scroll-hint" id="hint-server">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          좌우로 스크롤하세요
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
     <div class="card" id="card-lol">
-      <img src="lol.png" alt="롤·칼바·오버워치·발로란트·배그 게임 모집" />
+      <div class="img-wrap" id="wrap-lol">
+        <img src="lol.png" alt="롤·칼바·오버워치·발로란트·배그 게임 모집" />
+        <div class="scroll-hint" id="hint-lol">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          좌우로 스크롤하세요
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
     <div class="card" id="card-steam">
-      <img src="steam.png" alt="STEAM 게임 투표 만들기" />
+      <div class="img-wrap" id="wrap-steam">
+        <img src="steam.png" alt="STEAM 게임 투표 만들기" />
+        <div class="scroll-hint" id="hint-steam">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          좌우로 스크롤하세요
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
     <div class="card" id="card-thread">
-      <img src="thread.png" alt="스레드 만들기" />
+      <div class="img-wrap" id="wrap-thread">
+        <img src="thread.png" alt="스레드 만들기" />
+        <div class="scroll-hint" id="hint-thread">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          좌우로 스크롤하세요
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -138,6 +253,39 @@
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById('card-' + id).classList.add('active');
       btn.classList.add('active');
+    }
+
+    // 각 img-wrap에 스크롤 이벤트 → 힌트 숨김
+    document.querySelectorAll('.img-wrap').forEach(wrap => {
+      const hint = wrap.querySelector('.scroll-hint');
+      if (!hint) return;
+
+      let hidden = false;
+      wrap.addEventListener('scroll', () => {
+        if (!hidden && wrap.scrollLeft > 8) {
+          hidden = true;
+          hint.classList.add('hide');
+        }
+      }, { passive: true });
+
+      // 탭 전환 시 힌트 리셋
+      wrap.addEventListener('reset-hint', () => {
+        hidden = false;
+        hint.classList.remove('hide');
+        wrap.scrollLeft = 0;
+      });
+    });
+
+    // 탭 전환 시 해당 카드의 힌트 리셋
+    const originalShow = show;
+    function show(id, btn) {
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('card-' + id).classList.add('active');
+      btn.classList.add('active');
+
+      const wrap = document.querySelector('#card-' + id + ' .img-wrap');
+      if (wrap) wrap.dispatchEvent(new Event('reset-hint'));
     }
   </script>
 </body>
