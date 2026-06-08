@@ -75,20 +75,10 @@
       transform: translateY(0);
     }
 
-    /* 썸네일 */
-    .menu-thumb {
-      width: 120px;
-      height: 90px;
-      flex-shrink: 0;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
     /* 텍스트 영역 */
     .menu-body {
       flex: 1;
-      padding: 0 20px;
+      padding: 18px 20px;
       display: flex;
       flex-direction: column;
     }
@@ -107,6 +97,15 @@
       font-weight: 900;
       color: #1e3a22;
       line-height: 1.35;
+    }
+
+    /* 하단 안내 텍스트 */
+    .footer-hint {
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
     }
 
     /* 화살표 아이콘 */
@@ -225,20 +224,6 @@
 
     <!-- Header -->
     <div class="header">
-      <svg width="52" height="52" viewBox="0 0 100 100">
-        <path d="M50 8 C72 4,94 22,92 46 C90 68,72 93,50 93 C28 93,8 70,8 48 C8 26,28 12,50 8Z" fill="#5ab96b"/>
-        <circle cx="38" cy="46" r="7" fill="white"/>
-        <circle cx="62" cy="46" r="7" fill="white"/>
-        <circle cx="40" cy="47" r="3.5" fill="#1e3a22"/>
-        <circle cx="64" cy="47" r="3.5" fill="#1e3a22"/>
-        <circle cx="42" cy="44" r="1.5" fill="white"/>
-        <circle cx="66" cy="44" r="1.5" fill="white"/>
-        <circle cx="30" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
-        <circle cx="70" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
-        <path d="M39 63 Q50 73 61 63" stroke="#1e3a22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="37" cy="20" r="4" fill="#f0c430"/>
-        <circle cx="63" cy="18" r="3" fill="#f0c430"/>
-      </svg>
       <h1>GBTI 게임 매뉴얼</h1>
     </div>
 
@@ -246,7 +231,6 @@
     <div class="menu-list">
 
       <button class="menu-item" onclick="openZoom('server.jpg')">
-        <img class="menu-thumb" src="server.jpg" alt="" />
         <span class="menu-body">
           <span class="menu-label">서버 가이드</span>
           <span class="menu-title">서버 입장 가이드</span>
@@ -257,7 +241,6 @@
       </button>
 
       <button class="menu-item" onclick="openZoom('lol.png')">
-        <img class="menu-thumb" src="lol.png" alt="" />
         <span class="menu-body">
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">롤 · 칼바 · 오버 · 발로 · 배그</span>
@@ -268,7 +251,6 @@
       </button>
 
       <button class="menu-item" onclick="openZoom('steam.png')">
-        <img class="menu-thumb" src="steam.png" alt="" />
         <span class="menu-body">
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">STEAM 게임</span>
@@ -279,7 +261,6 @@
       </button>
 
       <button class="menu-item" onclick="openZoom('thread.png')">
-        <img class="menu-thumb" src="thread.png" alt="" />
         <span class="menu-body">
           <span class="menu-label">디스코드 팁</span>
           <span class="menu-title">스레드 만들기</span>
@@ -290,6 +271,8 @@
       </button>
 
     </div>
+
+    <p class="footer-hint">클릭해서 이미지 보기</p>
   </div>
 
   <!-- 라이트박스 -->
