@@ -150,6 +150,7 @@
       max-height: 90vh;
       width: auto;
       border-radius: 16px;
+      transition: opacity 0.2s ease;
     }
 
     /* PC에서는 이미지를 화면에 맞게 */
@@ -294,11 +295,14 @@
 
     function openZoom(src) {
       const img = document.getElementById('lightbox-img');
+
+      // 이전 이미지 즉시 숨겨서 깜빡임 방지
+      img.style.opacity = '0';
+      img.onload = () => { img.style.opacity = '1'; };
       img.src = src;
+
       document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
-
-      // 힌트 리셋
       inner.scrollLeft = 0;
       lbHint.classList.remove('hide');
     }
