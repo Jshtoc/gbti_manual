@@ -21,7 +21,7 @@
 
     .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 680px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,7 +32,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       align-self: flex-start;
     }
     .header h1 {
@@ -44,138 +44,78 @@
       font-weight: 900;
     }
 
-    /* ─── Nav ─── */
-    .nav {
+    /* ─── Menu list ─── */
+    .menu-list {
+      width: 100%;
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-      justify-content: center;
-      width: 100%;
+      flex-direction: column;
+      gap: 14px;
     }
-    .nav-btn {
+
+    .menu-item {
+      width: 100%;
       background-color: #f5efcc;
-      color: #1e3a22;
       border: none;
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 0.15s;
-    }
-    .nav-btn:hover  { background-color: #f5e07a; }
-    .nav-btn.active { background-color: #f0c430; }
-
-    /* ─── Card: positioned container for overlays ─── */
-    .card {
-      position: relative;
-      display: none;
-      width: 100%;
-    }
-    .card.active { display: block; }
-
-    /* ─── Image wrapper ─── */
-    .img-wrap {
-      width: 100%;
       border-radius: 20px;
-      overflow: hidden;
-    }
-
-    /* PC: 이미지 자연스럽게, 너무 길면 75vh 제한 */
-    .img-wrap img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 75vh;
-      object-fit: contain;
-      border-radius: 20px;
-      background: #f5efcc;
-    }
-
-    /* ─── 모바일: 가로 스크롤 ─── */
-    @media (max-width: 767px) {
-      .img-wrap {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        border-radius: 20px;
-      }
-      .img-wrap::-webkit-scrollbar { display: none; }
-
-      .img-wrap img {
-        width: auto;
-        min-width: 580px;
-        max-width: none;
-        max-height: none;
-        object-fit: unset;
-        background: none;
-        border-radius: 0;
-        cursor: default;
-      }
-    }
-
-    /* ─── 스크롤 힌트: card 기준 정중앙 (모바일만) ─── */
-    .scroll-hint {
-      display: none;
-    }
-
-    @media (max-width: 767px) {
-      .scroll-hint {
-        display: flex;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* 기본 위치 (sway 시작점 포함) */
-        transform: translate(calc(-50% - 8px), -50%);
-        z-index: 10;
-        align-items: center;
-        gap: 8px;
-        background: rgba(0, 0, 0, 0.58);
-        color: #fff;
-        padding: 9px 20px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 700;
-        pointer-events: none;
-        white-space: nowrap;
-        animation: hint-sway 1.3s ease-in-out infinite;
-        transition: opacity 0.35s ease;
-      }
-      .scroll-hint.hide {
-        opacity: 0;
-      }
-    }
-
-    @keyframes hint-sway {
-      0%   { transform: translate(calc(-50% - 8px), -50%); }
-      50%  { transform: translate(calc(-50% + 8px), -50%); }
-      100% { transform: translate(calc(-50% - 8px), -50%); }
-    }
-
-    /* ─── 확대 버튼 (항상 표시) ─── */
-    .zoom-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 10;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      font-family: inherit;
+      padding: 0;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
-      transition: background 0.15s;
+      gap: 0;
+      overflow: hidden;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-align: left;
     }
-    .zoom-btn:hover { background: rgba(0,0,0,0.75); }
+    .menu-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .menu-item:active {
+      transform: translateY(0);
+    }
+
+    /* 썸네일 */
+    .menu-thumb {
+      width: 120px;
+      height: 90px;
+      flex-shrink: 0;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* 텍스트 영역 */
+    .menu-body {
+      flex: 1;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2d5f38;
+      background-color: #f0c430;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+    .menu-title {
+      font-size: clamp(14px, 3.5vw, 17px);
+      font-weight: 900;
+      color: #1e3a22;
+      line-height: 1.35;
+    }
+
+    /* 화살표 아이콘 */
+    .menu-arrow {
+      flex-shrink: 0;
+      margin-right: 20px;
+      color: #2d5f38;
+      opacity: 0.6;
+    }
 
     /* ─── 라이트박스 ─── */
     #lightbox {
@@ -187,32 +127,94 @@
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
+      padding: 16px;
     }
     #lightbox.open { display: flex; }
 
-    #lightbox img {
+    /* 이미지 컨테이너: 가로 스크롤 지원 */
+    #lightbox-inner {
+      position: relative;
       max-width: 95vw;
-      max-height: 95vh;
-      object-fit: contain;
-      border-radius: 12px;
+      max-height: 92vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-radius: 16px;
       cursor: default;
     }
+    #lightbox-inner::-webkit-scrollbar { display: none; }
 
+    #lightbox-img {
+      display: block;
+      height: auto;
+      max-height: 90vh;
+      width: auto;
+      border-radius: 16px;
+    }
+
+    /* PC에서는 이미지를 화면에 맞게 */
+    @media (min-width: 768px) {
+      #lightbox-img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+      }
+    }
+
+    /* 스크롤 힌트 (라이트박스 내부, 모바일) */
+    #lb-scroll-hint {
+      display: none;
+    }
+    @media (max-width: 767px) {
+      #lb-scroll-hint {
+        display: flex;
+        position: fixed;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(calc(-50% - 8px));
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.18);
+        color: #fff;
+        padding: 9px 20px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        pointer-events: none;
+        white-space: nowrap;
+        animation: hint-sway 1.3s ease-in-out infinite;
+        transition: opacity 0.35s ease;
+        z-index: 10001;
+      }
+      #lb-scroll-hint.hide {
+        opacity: 0;
+      }
+    }
+
+    @keyframes hint-sway {
+      0%   { transform: translateX(calc(-50% - 8px)); }
+      50%  { transform: translateX(calc(-50% + 8px)); }
+      100% { transform: translateX(calc(-50% - 8px)); }
+    }
+
+    /* 닫기 버튼 */
     #lightbox-close {
-      position: absolute;
+      position: fixed;
       top: 16px;
       right: 16px;
       background: rgba(255, 255, 255, 0.15);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 10001;
       transition: background 0.15s;
     }
     #lightbox-close:hover { background: rgba(255,255,255,0.3); }
@@ -223,134 +225,110 @@
 
     <!-- Header -->
     <div class="header">
+      <svg width="52" height="52" viewBox="0 0 100 100">
+        <path d="M50 8 C72 4,94 22,92 46 C90 68,72 93,50 93 C28 93,8 70,8 48 C8 26,28 12,50 8Z" fill="#5ab96b"/>
+        <circle cx="38" cy="46" r="7" fill="white"/>
+        <circle cx="62" cy="46" r="7" fill="white"/>
+        <circle cx="40" cy="47" r="3.5" fill="#1e3a22"/>
+        <circle cx="64" cy="47" r="3.5" fill="#1e3a22"/>
+        <circle cx="42" cy="44" r="1.5" fill="white"/>
+        <circle cx="66" cy="44" r="1.5" fill="white"/>
+        <circle cx="30" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
+        <circle cx="70" cy="58" r="5" fill="#f0a0a0" opacity="0.55"/>
+        <path d="M39 63 Q50 73 61 63" stroke="#1e3a22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="37" cy="20" r="4" fill="#f0c430"/>
+        <circle cx="63" cy="18" r="3" fill="#f0c430"/>
+      </svg>
       <h1>GBTI 게임 매뉴얼</h1>
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-      <button class="nav-btn active" onclick="show('server', this)">서버 입장 가이드</button>
-      <button class="nav-btn" onclick="show('lol', this)">롤 · 칼바 · 오버 · 발로 · 배그</button>
-      <button class="nav-btn" onclick="show('steam', this)">STEAM 게임</button>
-      <button class="nav-btn" onclick="show('thread', this)">스레드 만들기</button>
-    </nav>
+    <!-- Menu list -->
+    <div class="menu-list">
 
-    <!-- server -->
-    <div class="card active" id="card-server">
-      <div class="img-wrap" id="wrap-server">
-        <img src="server.jpg" alt="서버 입장 가이드" />
-      </div>
-      <div class="scroll-hint" id="hint-server">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        좌우로 스크롤하세요
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-      <button class="zoom-btn" onclick="openZoom('server.jpg')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        확대
+      <button class="menu-item" onclick="openZoom('server.jpg')">
+        <img class="menu-thumb" src="server.jpg" alt="" />
+        <span class="menu-body">
+          <span class="menu-label">서버 가이드</span>
+          <span class="menu-title">서버 입장 가이드</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
       </button>
-    </div>
 
-    <!-- lol -->
-    <div class="card" id="card-lol">
-      <div class="img-wrap" id="wrap-lol">
-        <img src="lol.png" alt="롤·칼바·오버워치·발로란트·배그 게임 모집" />
-      </div>
-      <div class="scroll-hint" id="hint-lol">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        좌우로 스크롤하세요
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-      <button class="zoom-btn" onclick="openZoom('lol.png')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        확대
+      <button class="menu-item" onclick="openZoom('lol.png')">
+        <img class="menu-thumb" src="lol.png" alt="" />
+        <span class="menu-body">
+          <span class="menu-label">게임 모집</span>
+          <span class="menu-title">롤 · 칼바 · 오버 · 발로 · 배그</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
       </button>
-    </div>
 
-    <!-- steam -->
-    <div class="card" id="card-steam">
-      <div class="img-wrap" id="wrap-steam">
-        <img src="steam.png" alt="STEAM 게임 투표 만들기" />
-      </div>
-      <div class="scroll-hint" id="hint-steam">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        좌우로 스크롤하세요
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-      <button class="zoom-btn" onclick="openZoom('steam.png')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        확대
+      <button class="menu-item" onclick="openZoom('steam.png')">
+        <img class="menu-thumb" src="steam.png" alt="" />
+        <span class="menu-body">
+          <span class="menu-label">게임 모집</span>
+          <span class="menu-title">STEAM 게임</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
       </button>
-    </div>
 
-    <!-- thread -->
-    <div class="card" id="card-thread">
-      <div class="img-wrap" id="wrap-thread">
-        <img src="thread.png" alt="스레드 만들기" />
-      </div>
-      <div class="scroll-hint" id="hint-thread">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        좌우로 스크롤하세요
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-      <button class="zoom-btn" onclick="openZoom('thread.png')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        확대
+      <button class="menu-item" onclick="openZoom('thread.png')">
+        <img class="menu-thumb" src="thread.png" alt="" />
+        <span class="menu-body">
+          <span class="menu-label">디스코드 팁</span>
+          <span class="menu-title">스레드 만들기</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
       </button>
-    </div>
 
+    </div>
   </div>
 
   <!-- 라이트박스 -->
   <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+    <div id="lightbox-inner" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div id="lb-scroll-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      좌우로 스크롤하세요
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
     <button id="lightbox-close" onclick="closeLightbox()">✕</button>
   </div>
 
   <script>
-    function show(id, btn) {
-      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('card-' + id).classList.add('active');
-      btn.classList.add('active');
-
-      // 탭 전환 시 스크롤 위치·힌트 리셋
-      const wrap = document.querySelector('#card-' + id + ' .img-wrap');
-      const hint = document.querySelector('#card-' + id + ' .scroll-hint');
-      if (wrap) wrap.scrollLeft = 0;
-      if (hint) hint.classList.remove('hide');
-    }
-
-    // 스크롤 시 힌트 숨김 (img-wrap 기준)
-    document.querySelectorAll('.img-wrap').forEach(wrap => {
-      const hint = wrap.closest('.card').querySelector('.scroll-hint');
-      if (!hint) return;
-      let hidden = false;
-      wrap.addEventListener('scroll', () => {
-        if (!hidden && wrap.scrollLeft > 8) {
-          hidden = true;
-          hint.classList.add('hide');
-        }
-      }, { passive: true });
-    });
-
-    // PC에서 이미지 클릭 시 확대
-    if (window.innerWidth >= 768) {
-      document.querySelectorAll('.img-wrap img').forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => openZoom(img.src));
-      });
-    }
+    const inner = document.getElementById('lightbox-inner');
+    const lbHint = document.getElementById('lb-scroll-hint');
 
     function openZoom(src) {
-      document.getElementById('lightbox-img').src = src;
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
       document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
+
+      // 힌트 리셋
+      inner.scrollLeft = 0;
+      lbHint.classList.remove('hide');
     }
 
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    // 라이트박스 내 스크롤 시 힌트 숨김
+    inner.addEventListener('scroll', () => {
+      if (inner.scrollLeft > 8) lbHint.classList.add('hide');
+    }, { passive: true });
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeLightbox();
