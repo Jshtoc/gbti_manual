@@ -198,6 +198,100 @@
       100% { transform: translateX(calc(-50% - 8px)); }
     }
 
+    /* ─── 텍스트 모달 ─── */
+    #text-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      cursor: pointer;
+    }
+    #text-modal.open { display: flex; }
+
+    #text-modal-inner {
+      background: #f5efcc;
+      border-radius: 24px;
+      padding: 28px 24px 24px;
+      max-width: 480px;
+      width: 100%;
+      cursor: default;
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+
+    #text-modal-inner h2 {
+      font-size: 17px;
+      font-weight: 900;
+      color: #1e3a22;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(45,95,56,0.15);
+    }
+
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .channel-row {
+      background: #2d5f38;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .channel-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: #f0c430;
+      white-space: nowrap;
+    }
+
+    .channel-desc {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.45;
+    }
+
+    .modal-body {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e3a22;
+      line-height: 1.7;
+    }
+
+    .modal-body p { margin-bottom: 10px; }
+    .modal-body p:last-child { margin-bottom: 0; }
+
+    #text-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      transition: background 0.15s;
+    }
+    #text-modal-close:hover { background: rgba(255,255,255,0.3); }
+
     /* 닫기 버튼 */
     #lightbox-close {
       position: fixed;
@@ -234,7 +328,7 @@
       <button class="menu-item" onclick="openZoom('server.jpg')">
         <span class="menu-body">
           <span class="menu-label">서버 가이드</span>
-          <span class="menu-title">서버 입장 가이드</span>
+          <span class="menu-title">디코 자기소개 적는방법</span>
         </span>
         <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"/>
@@ -271,6 +365,16 @@
         </svg>
       </button>
 
+      <button class="menu-item" onclick="openTextModal()">
+        <span class="menu-body">
+          <span class="menu-label">카톡방 안내</span>
+          <span class="menu-title">카톡방 분리 운영 안내</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
       <button class="menu-item" onclick="openZoom('discord_pc.png')">
         <span class="menu-body">
           <span class="menu-label">디스코드 팁</span>
@@ -294,6 +398,33 @@
     </div>
 
     <p class="footer-hint">클릭해서 이미지 보기</p>
+  </div>
+
+  <!-- 텍스트 모달 -->
+  <div id="text-modal" onclick="closeTextModal()">
+    <div id="text-modal-inner" onclick="event.stopPropagation()">
+      <h2>카톡방 분리 운영 안내</h2>
+      <div class="channel-list">
+        <div class="channel-row">
+          <span class="channel-name">수다방</span>
+          <span class="channel-desc">수다 전용 채널 [자삭X]</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-name">메인방</span>
+          <span class="channel-desc">전 인원 참여 메인 채널 [자삭X]</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-name">공지방</span>
+          <span class="channel-desc">게임 투표 및 구인 공지 채널 [채팅X 자삭O]</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>현재 총 3개의 채널로 운영되고 있습니다.<br>자신이 어느채널인지 모를경우 톡방 인원들에게 물어봐주세요!</p>
+        <p>수다방 이용(많은 채팅량)을 원하시는 경우, 언제든지 방장(91 아로)님께 요청해 주시면 입장 가능하십니다!</p>
+        <p>게임개설, 투표방법 외 문의사항이나 궁금하신 점, 애매한 부분, 해도 되나..? 싶은점들 모두 톡방인원이 아닌 방장(91 아로)님에게 먼저 물어보고 진행해주시면 됩니다.</p>
+      </div>
+    </div>
+    <button id="text-modal-close" onclick="closeTextModal()">✕</button>
   </div>
 
   <!-- 라이트박스 -->
@@ -338,8 +469,18 @@
     }, { passive: true });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') { closeLightbox(); closeTextModal(); }
     });
+
+    function openTextModal() {
+      document.getElementById('text-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTextModal() {
+      document.getElementById('text-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
   </script>
 </body>
 </html>
