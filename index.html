@@ -49,8 +49,18 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
+
+    .section-header {
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.1em;
+      padding: 4px 4px 2px;
+      margin-top: 14px;
+    }
+    .section-header:first-child { margin-top: 0; }
 
     .menu-item {
       width: 100%;
@@ -325,15 +335,64 @@
     <!-- Menu list -->
     <div class="menu-list">
 
+      <!-- ── 카톡 ── -->
+      <div class="section-header">[ 카톡 ]</div>
+
+      <button class="menu-item" onclick="openTextModal()">
+        <span class="menu-body">
+          <span class="menu-label">카톡</span>
+          <span class="menu-title">카톡방 분리 운영 안내</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <button class="menu-item" onclick="openZoom('kakao_lock.jpg')">
+        <span class="menu-body">
+          <span class="menu-label">카톡</span>
+          <span class="menu-title">카톡 1:1 대화 잠금 방법</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- ── 디스코드 ── -->
+      <div class="section-header">[ 디스코드 ]</div>
+
       <button class="menu-item" onclick="openZoom('server.jpg')">
         <span class="menu-body">
-          <span class="menu-label">서버 가이드</span>
+          <span class="menu-label">디스코드</span>
           <span class="menu-title">디코 자기소개 적는방법</span>
         </span>
         <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"/>
         </svg>
       </button>
+
+      <button class="menu-item" onclick="openZoom('discord_pc.png')">
+        <span class="menu-body">
+          <span class="menu-label">디스코드</span>
+          <span class="menu-title">PC DM 설정 방법</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <button class="menu-item" onclick="openZoom('discord_mobile.jpg')">
+        <span class="menu-body">
+          <span class="menu-label">디스코드</span>
+          <span class="menu-title">모바일 DM 설정 방법</span>
+        </span>
+        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- ── 게임 모집 ── -->
+      <div class="section-header">[ 게임 모집 ]</div>
 
       <button class="menu-item" onclick="openZoom('lol.png')">
         <span class="menu-body">
@@ -357,38 +416,8 @@
 
       <button class="menu-item" onclick="openZoom('thread.png')">
         <span class="menu-body">
-          <span class="menu-label">디스코드 팁</span>
-          <span class="menu-title">스레드 만들기</span>
-        </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-
-      <button class="menu-item" onclick="openTextModal()">
-        <span class="menu-body">
-          <span class="menu-label">카톡방 안내</span>
-          <span class="menu-title">카톡방 분리 운영 안내</span>
-        </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-
-      <button class="menu-item" onclick="openZoom('discord_pc.png')">
-        <span class="menu-body">
-          <span class="menu-label">디스코드 팁</span>
-          <span class="menu-title">PC DM 설정</span>
-        </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-
-      <button class="menu-item" onclick="openZoom('discord_mobile.jpg')">
-        <span class="menu-body">
-          <span class="menu-label">디스코드 팁</span>
-          <span class="menu-title">모바일 DM 설정</span>
+          <span class="menu-label">게임 모집</span>
+          <span class="menu-title">게임일정 조율 스레드 만들기</span>
         </span>
         <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"/>
