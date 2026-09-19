@@ -2,21 +2,69 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>GBTI 게임 매뉴얼</title>
+  <meta name="description" content="GBTI 서버 구성원을 위한 카톡/디스코드/게임 모집 운영 매뉴얼" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jshtoc.github.io/gbti_manual/" />
+  <meta property="og:title" content="GBTI 게임 매뉴얼" />
+  <meta property="og:description" content="GBTI 서버 구성원을 위한 카톡/디스코드/게임 모집 운영 매뉴얼" />
+  <meta property="og:image" content="og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GBTI 게임 매뉴얼" />
+  <meta name="twitter:description" content="GBTI 서버 구성원을 위한 카톡/디스코드/게임 모집 운영 매뉴얼" />
+  <meta name="twitter:image" content="og-image.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:        #0C0C0B;
+      --bg2:       #141413;
+      --fg:        #EDEDE8;
+      --muted:     #93938F;
+      --border:    rgba(237,237,232,0.10);
+      --border-hover: rgba(237,237,232,0.34);
+      --accent:    #FF3D00;
+      --accent2:   #FF7A5C;
+      --good:      #00C96B;
+      --good2:     #6EE7B7;
+      --radius:    18px;
+      --transition: 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background-color: #2d5f38;
-      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 16px 60px;
+      padding: 0 16px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* film-grain texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .container {
@@ -25,105 +73,200 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
-    /* ─── Header ─── */
-    .header {
-      display: flex;
+    /* ─── Hero ─── */
+    .hero {
+      width: 100%;
+      padding: 64px 4px 36px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: 'Syne', 'Noto Sans KR', sans-serif;
+      font-size: clamp(56px, 15vw, 108px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-bottom: 22px;
+    }
+    .hero-desc {
+      max-width: 420px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .hero-pill {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 28px;
-      align-self: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 100px;
+      color: var(--muted);
     }
-    .header h1 {
-      background-color: #f5efcc;
-      color: #1e3a22;
-      padding: 10px 28px;
-      border-radius: 999px;
-      font-size: clamp(18px, 5vw, 26px);
-      font-weight: 900;
+    .hero-pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: blink 2.2s ease infinite;
     }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    /* ─── Marquee ─── */
+    .marquee-wrap {
+      width: 100%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: 36px;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: mq 22s linear infinite;
+    }
+    .mq-item {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 44px;
+    }
+    .mq-item::after { content: '✦'; font-size: 7px; color: var(--accent); }
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
     /* ─── Menu list ─── */
     .menu-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .section-header {
-      font-size: 12px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.1em;
-      padding: 4px 4px 2px;
-      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 14px;
+      margin-top: 30px;
+      border-bottom: 1px solid var(--border);
     }
     .section-header:first-child { margin-top: 0; }
+    .sh-eyebrow {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .sh-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+    }
 
     .menu-item {
       width: 100%;
-      background-color: #f5efcc;
-      border: none;
-      border-radius: 20px;
-      padding: 0;
+      background-color: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 18px 18px 22px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0;
-      overflow: hidden;
+      justify-content: space-between;
+      gap: 14px;
       font-family: inherit;
-      transition: transform 0.15s, box-shadow 0.15s;
       text-align: left;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, background 0.3s ease;
     }
+    .menu-item.in-view { opacity: 1; transform: translateY(0); }
     .menu-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      border-color: var(--border-hover);
+      background: #1a1a18;
     }
-    .menu-item:active {
-      transform: translateY(0);
-    }
+    .menu-item:active { transform: scale(0.99); }
 
-    /* 텍스트 영역 */
     .menu-body {
-      flex: 1;
-      padding: 18px 20px;
       display: flex;
       flex-direction: column;
+      gap: 8px;
     }
     .menu-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #2d5f38;
-      background-color: #f0c430;
-      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
       padding: 3px 10px;
-      border-radius: 999px;
-      margin-bottom: 6px;
+      display: inline-block;
+      width: fit-content;
     }
     .menu-title {
-      font-size: clamp(14px, 3.5vw, 17px);
-      font-weight: 900;
-      color: #1e3a22;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 700;
+      color: var(--fg);
       line-height: 1.35;
+    }
+
+    .menu-arrow {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+    }
+    .menu-item:hover .menu-arrow {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: rotate(45deg);
     }
 
     /* 하단 안내 텍스트 */
     .footer-hint {
-      margin-top: 24px;
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    /* 화살표 아이콘 */
-    .menu-arrow {
-      flex-shrink: 0;
-      margin-right: 20px;
-      color: #2d5f38;
-      opacity: 0.6;
+      margin-top: 40px;
+      padding-top: 24px;
+      width: 100%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-align: center;
     }
 
     /* ─── 라이트박스 ─── */
@@ -131,7 +274,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.95);
       z-index: 9999;
       align-items: center;
       justify-content: center;
@@ -140,7 +283,6 @@
     }
     #lightbox.open { display: flex; }
 
-    /* 이미지 컨테이너: 가로 스크롤 지원 */
     #lightbox-inner {
       position: relative;
       max-width: 95vw;
@@ -163,7 +305,6 @@
       transition: opacity 0.2s ease;
     }
 
-    /* PC에서는 이미지를 화면에 맞게 */
     @media (min-width: 768px) {
       #lightbox-img {
         max-width: 90vw;
@@ -172,7 +313,6 @@
       }
     }
 
-    /* 스크롤 힌트 (라이트박스 내부, 모바일) */
     #lb-scroll-hint {
       display: none;
     }
@@ -185,12 +325,12 @@
         transform: translateX(calc(-50% - 8px));
         align-items: center;
         gap: 8px;
-        background: rgba(255,255,255,0.18);
+        background: rgba(255,255,255,0.12);
         color: #fff;
         padding: 9px 20px;
         border-radius: 999px;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 600;
         pointer-events: none;
         white-space: nowrap;
         animation: hint-sway 1.3s ease-in-out infinite;
@@ -213,7 +353,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       z-index: 9999;
       align-items: center;
       justify-content: center;
@@ -223,7 +363,8 @@
     #text-modal.open, #reserve-modal.open, #group-modal.open { display: flex; }
 
     #text-modal-inner, #reserve-modal-inner, #group-modal-inner {
-      background: #f5efcc;
+      background: var(--bg2);
+      border: 1px solid var(--border);
       border-radius: 24px;
       padding: 28px 24px 24px;
       max-width: 480px;
@@ -231,15 +372,16 @@
       cursor: default;
       max-height: 88vh;
       overflow-y: auto;
+      position: relative;
     }
 
     #text-modal-inner h2, #reserve-modal-inner h2, #group-modal-inner h2 {
       font-size: 17px;
       font-weight: 900;
-      color: #1e3a22;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(45,95,56,0.15);
+      color: var(--fg);
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
     }
 
     .channel-list {
@@ -250,7 +392,8 @@
     }
 
     .channel-row {
-      background: #2d5f38;
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px 16px;
       display: flex;
@@ -259,23 +402,23 @@
     }
 
     .channel-name {
-      font-size: 14px;
-      font-weight: 900;
-      color: #f0c430;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
       white-space: nowrap;
     }
 
     .channel-desc {
       font-size: 13px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      color: var(--muted);
       line-height: 1.45;
     }
 
     .modal-body {
       font-size: 13px;
-      font-weight: 700;
-      color: #1e3a22;
+      font-weight: 500;
+      color: var(--muted);
       line-height: 1.7;
     }
 
@@ -286,21 +429,25 @@
       position: absolute;
       top: 16px;
       right: 16px;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      border: none;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--fg);
       border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10001;
-      transition: background 0.15s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover { background: rgba(255,255,255,0.3); }
+    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
 
     /* ─── 예약 모달 공통 스타일 ─── */
     .example-box {
@@ -308,37 +455,36 @@
       padding: 12px 16px;
       margin-bottom: 10px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 1.6;
+      color: var(--fg);
     }
     .example-box.good {
-      background: rgba(45, 95, 56, 0.12);
-      border: 1.5px solid #2d5f38;
-      color: #1e3a22;
+      background: rgba(0, 201, 107, 0.10);
+      border: 1.5px solid rgba(0, 201, 107, 0.4);
     }
     .example-box.bad {
-      background: rgba(200, 50, 50, 0.08);
-      border: 1.5px solid #c83232;
-      color: #7a1a1a;
+      background: rgba(255, 61, 0, 0.10);
+      border: 1.5px solid rgba(255, 61, 0, 0.4);
     }
     .example-label {
       font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.05em;
+      font-weight: 800;
+      letter-spacing: 0.03em;
       margin-bottom: 6px;
       display: block;
     }
-    .example-box.good .example-label { color: #2d5f38; }
-    .example-box.bad .example-label { color: #c83232; }
+    .example-box.good .example-label { color: var(--good2); }
+    .example-box.bad .example-label { color: var(--accent2); }
 
-    /* 닫기 버튼 */
+    /* 닫기 버튼 (라이트박스) */
     #lightbox-close {
       position: fixed;
       top: 16px;
       right: 16px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.12);
       color: #fff;
-      border: none;
       border-radius: 50%;
       width: 44px;
       height: 44px;
@@ -350,31 +496,63 @@
       z-index: 10001;
       transition: background 0.15s;
     }
-    #lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    #lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .hero-pill-dot { animation: none; }
+      .menu-item { opacity: 1; transform: none; transition: none; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- Header -->
-    <div class="header">
-      <h1>GBTI 게임 매뉴얼</h1>
+    <!-- Hero -->
+    <header class="hero">
+      <p class="hero-eyebrow">Game Community Manual</p>
+      <h1 class="hero-title">GBTI</h1>
+      <p class="hero-desc">게임을 사랑하는 성인들이 모인 종합게임클랜입니다.<br>GBTI 서버 구성원들과 다양한 게임을 함께 &amp; 즐겁게 플레이 하세요!</p>
+      <div class="hero-pill"><span class="hero-pill-dot"></span>운영 매뉴얼</div>
+    </header>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="mq-item">카톡</span>
+        <span class="mq-item">디스코드</span>
+        <span class="mq-item">게임 모집</span>
+        <span class="mq-item">GBTI</span>
+        <span class="mq-item">카톡</span>
+        <span class="mq-item">디스코드</span>
+        <span class="mq-item">게임 모집</span>
+        <span class="mq-item">GBTI</span>
+        <span class="mq-item">카톡</span>
+        <span class="mq-item">디스코드</span>
+        <span class="mq-item">게임 모집</span>
+        <span class="mq-item">GBTI</span>
+      </div>
     </div>
 
     <!-- Menu list -->
     <div class="menu-list">
 
       <!-- ── 카톡 ── -->
-      <div class="section-header">[ 카톡 ]</div>
+      <div class="section-header">
+        <span class="sh-eyebrow">Kakao</span>
+        <span class="sh-title">카톡</span>
+      </div>
 
       <button class="menu-item" onclick="openTextModal()">
         <span class="menu-body">
           <span class="menu-label">카톡</span>
           <span class="menu-title">카톡방 분리 운영 안내</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('kakao_lock.jpg')">
@@ -382,22 +560,41 @@
           <span class="menu-label">카톡</span>
           <span class="menu-title">카톡 1:1 대화 잠금 방법</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
+      </button>
+
+      <button class="menu-item" onclick="openZoom('kakao_policy.png')">
+        <span class="menu-body">
+          <span class="menu-label">카톡</span>
+          <span class="menu-title">카톡방 별 운영방침</span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <!-- ── 디스코드 ── -->
-      <div class="section-header">[ 디스코드 ]</div>
+      <div class="section-header">
+        <span class="sh-eyebrow">Discord</span>
+        <span class="sh-title">디스코드</span>
+      </div>
 
       <button class="menu-item" onclick="openZoom('server.jpg')">
         <span class="menu-body">
           <span class="menu-label">디스코드</span>
           <span class="menu-title">디코 자기소개 적는방법</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('discord_intro_example.jpg')">
@@ -405,9 +602,11 @@
           <span class="menu-label">디스코드</span>
           <span class="menu-title">디코 자기소개 - 교대근무자 예시</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('discord_pc.png')">
@@ -415,9 +614,11 @@
           <span class="menu-label">디스코드</span>
           <span class="menu-title">PC DM 설정 방법</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('discord_mobile.jpg')">
@@ -425,22 +626,29 @@
           <span class="menu-label">디스코드</span>
           <span class="menu-title">모바일 DM 설정 방법</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <!-- ── 게임 모집 ── -->
-      <div class="section-header">[ 게임 모집 ]</div>
+      <div class="section-header">
+        <span class="sh-eyebrow">Game Recruit</span>
+        <span class="sh-title">게임 모집</span>
+      </div>
 
       <button class="menu-item" onclick="openReserveModal()">
         <span class="menu-body">
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">게임 예약 관련 안내</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('lol.png')">
@@ -448,9 +656,11 @@
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">롤 · 칼바 · 오버 · 발로 · 배그</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('steam.png')">
@@ -458,9 +668,11 @@
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">STEAM 게임</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openZoom('thread.png')">
@@ -468,9 +680,11 @@
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">게임일정 조율 스레드 만들기</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
       <button class="menu-item" onclick="openGroupModal()">
@@ -478,9 +692,11 @@
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">단체게임 진행 시간 안내</span>
         </span>
-        <svg class="menu-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
+        <span class="menu-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12L12 2M12 2H4M12 2V10"/>
+          </svg>
+        </span>
       </button>
 
     </div>
@@ -571,7 +787,6 @@
     function openZoom(src) {
       const img = document.getElementById('lightbox-img');
 
-      // 이전 이미지 즉시 숨겨서 깜빡임 방지
       img.style.opacity = '0';
       img.onload = () => { img.style.opacity = '1'; };
       img.src = src;
@@ -587,7 +802,6 @@
       document.body.style.overflow = '';
     }
 
-    // 라이트박스 내 스크롤 시 힌트 숨김
     inner.addEventListener('scroll', () => {
       if (inner.scrollLeft > 8) lbHint.classList.add('hide');
     }, { passive: true });
@@ -625,6 +839,21 @@
       document.getElementById('group-modal').classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    // 스크롤 시 메뉴 카드 순차 등장
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.menu-item').forEach((el, i) => {
+      el.style.transitionDelay = Math.min(i * 40, 300) + 'ms';
+      revealObserver.observe(el);
+    });
   </script>
 </body>
 </html>
