@@ -189,6 +189,18 @@
       color: var(--fg);
     }
 
+    .sh-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+    .sh-note {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
     .menu-item {
       width: 100%;
       background-color: var(--bg2);
@@ -349,7 +361,7 @@
     }
 
     /* ─── 텍스트 모달 ─── */
-    #text-modal, #reserve-modal, #group-modal {
+    #text-modal, #reserve-modal, #group-modal, #steam-modal {
       display: none;
       position: fixed;
       inset: 0;
@@ -360,9 +372,9 @@
       padding: 24px 16px;
       cursor: pointer;
     }
-    #text-modal.open, #reserve-modal.open, #group-modal.open { display: flex; }
+    #text-modal.open, #reserve-modal.open, #group-modal.open, #steam-modal.open { display: flex; }
 
-    #text-modal-inner, #reserve-modal-inner, #group-modal-inner {
+    #text-modal-inner, #reserve-modal-inner, #group-modal-inner, #steam-modal-inner {
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 24px;
@@ -375,7 +387,7 @@
       position: relative;
     }
 
-    #text-modal-inner h2, #reserve-modal-inner h2, #group-modal-inner h2 {
+    #text-modal-inner h2, #reserve-modal-inner h2, #group-modal-inner h2, #steam-modal-inner h2 {
       font-size: 17px;
       font-weight: 900;
       color: var(--fg);
@@ -425,7 +437,7 @@
     .modal-body p { margin-bottom: 10px; }
     .modal-body p:last-child { margin-bottom: 0; }
 
-    #text-modal-close, #reserve-modal-close, #group-modal-close {
+    #text-modal-close, #reserve-modal-close, #group-modal-close, #steam-modal-close {
       position: absolute;
       top: 16px;
       right: 16px;
@@ -443,7 +455,7 @@
       z-index: 10001;
       transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover {
+    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover, #steam-modal-close:hover {
       background: var(--fg);
       color: var(--bg);
       border-color: var(--fg);
@@ -636,7 +648,10 @@
       <!-- ── 게임 모집 ── -->
       <div class="section-header">
         <span class="sh-eyebrow">Game Recruit</span>
-        <span class="sh-title">게임 모집</span>
+        <span class="sh-row">
+          <span class="sh-title">게임 모집</span>
+          <span class="sh-note">공지방 게임 홍보는 일 1회만 홍보해주세요</span>
+        </span>
       </div>
 
       <button class="menu-item" onclick="openReserveModal()">
@@ -663,7 +678,7 @@
         </span>
       </button>
 
-      <button class="menu-item" onclick="openZoom('steam.png')">
+      <button class="menu-item" onclick="openSteamModal()">
         <span class="menu-body">
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">STEAM 게임</span>
@@ -741,6 +756,36 @@
     <button id="group-modal-close" onclick="closeGroupModal()">✕</button>
   </div>
 
+  <!-- STEAM 게임 모집 안내 모달 -->
+  <div id="steam-modal" onclick="closeSteamModal()">
+    <div id="steam-modal-inner" onclick="event.stopPropagation()">
+      <h2>STEAM 게임 모집 안내</h2>
+      <div class="channel-list">
+        <div class="channel-row">
+          <span class="channel-name">1</span>
+          <span class="channel-desc">메뉴 버튼 클릭 &gt; 톡게시판(PC), 투표(Mo) &gt; 투표 탭 &gt; 우측상단 연필 아이콘 클릭</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-name">2</span>
+          <span class="channel-desc">제목란: 게임명, 날짜 표기<br>투표란: 최대인원, 특이사항 기재</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>· 투표 제작 시 종료시간 '체크 해제' 필수!</p>
+        <p>· 댓글에 게임 관련 정보(가격, 게임설명) 및 링크를 넣어주시면 모집이 용이합니다.</p>
+      </div>
+      <div class="example-box bad" style="margin-top:16px;">
+        <span class="example-label">⚠️ 인원 안내</span>
+        스팀 정기게임은 <b>5인 이하</b>로 진행해야 합니다.<br>
+        5인 이상의 인원으로 게임을 모집할 경우 <b>'91 아로'</b>님에게 문의해 주세요.
+      </div>
+      <button class="menu-item" style="margin-top:6px;" onclick="closeSteamModal(); openZoom('steam.png')">
+        <span class="menu-body"><span class="menu-title">투표 예시 이미지 보기</span></span>
+      </button>
+    </div>
+    <button id="steam-modal-close" onclick="closeSteamModal()">✕</button>
+  </div>
+
   <!-- 텍스트 모달 -->
   <div id="text-modal" onclick="closeTextModal()">
     <div id="text-modal-inner" onclick="event.stopPropagation()">
@@ -808,7 +853,7 @@
     }, { passive: true });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeLightbox(); closeTextModal(); closeReserveModal(); closeGroupModal(); }
+      if (e.key === 'Escape') { closeLightbox(); closeTextModal(); closeReserveModal(); closeGroupModal(); closeSteamModal(); }
     });
 
     function openTextModal() {
@@ -828,6 +873,16 @@
 
     function closeReserveModal() {
       document.getElementById('reserve-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function openSteamModal() {
+      document.getElementById('steam-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSteamModal() {
+      document.getElementById('steam-modal').classList.remove('open');
       document.body.style.overflow = '';
     }
 
