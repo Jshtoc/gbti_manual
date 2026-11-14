@@ -361,7 +361,7 @@
     }
 
     /* ─── 텍스트 모달 ─── */
-    #text-modal, #reserve-modal, #group-modal, #steam-modal, #lol-modal {
+    #text-modal, #reserve-modal, #group-modal, #steam-modal {
       display: none;
       position: fixed;
       inset: 0;
@@ -372,9 +372,9 @@
       padding: 24px 16px;
       cursor: pointer;
     }
-    #text-modal.open, #reserve-modal.open, #group-modal.open, #steam-modal.open, #lol-modal.open { display: flex; }
+    #text-modal.open, #reserve-modal.open, #group-modal.open, #steam-modal.open { display: flex; }
 
-    #text-modal-inner, #reserve-modal-inner, #group-modal-inner, #steam-modal-inner, #lol-modal-inner {
+    #text-modal-inner, #reserve-modal-inner, #group-modal-inner, #steam-modal-inner {
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 24px;
@@ -387,7 +387,7 @@
       position: relative;
     }
 
-    #text-modal-inner h2, #reserve-modal-inner h2, #group-modal-inner h2, #steam-modal-inner h2, #lol-modal-inner h2 {
+    #text-modal-inner h2, #reserve-modal-inner h2, #group-modal-inner h2, #steam-modal-inner h2 {
       font-size: 17px;
       font-weight: 900;
       color: var(--fg);
@@ -437,7 +437,7 @@
     .modal-body p { margin-bottom: 10px; }
     .modal-body p:last-child { margin-bottom: 0; }
 
-    #text-modal-close, #reserve-modal-close, #group-modal-close, #steam-modal-close, #lol-modal-close {
+    #text-modal-close, #reserve-modal-close, #group-modal-close, #steam-modal-close {
       position: absolute;
       top: 16px;
       right: 16px;
@@ -455,7 +455,7 @@
       z-index: 10001;
       transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover, #steam-modal-close:hover, #lol-modal-close:hover {
+    #text-modal-close:hover, #reserve-modal-close:hover, #group-modal-close:hover, #steam-modal-close:hover {
       background: var(--fg);
       color: var(--bg);
       border-color: var(--fg);
@@ -666,7 +666,7 @@
         </span>
       </button>
 
-      <button class="menu-item" onclick="openLolModal()">
+      <button class="menu-item" onclick="openZoom('lol.png')">
         <span class="menu-body">
           <span class="menu-label">게임 모집</span>
           <span class="menu-title">롤 · 칼바 · 오버 · 발로 · 배그</span>
@@ -760,23 +760,6 @@
       </div>
     </div>
     <button id="group-modal-close" onclick="closeGroupModal()">✕</button>
-  </div>
-
-  <!-- 롤·칼바·오버·발로·배그 모집 안내 모달 -->
-  <div id="lol-modal" onclick="closeLolModal()">
-    <div id="lol-modal-inner" onclick="event.stopPropagation()">
-      <h2>롤 · 칼바 · 오버 · 발로 · 배그</h2>
-      <div class="example-box bad">
-        <span class="example-label">⚠️ 플레이타임 안내</span>
-        <b>기본 2시간 이상 플레이는 염두에 두셔야 합니다.</b><br>
-        그 외적으로 짧은 플레이타임, 즉 <b>'환불런 또는 개인사정'</b> 일시 따로 명시하거나 같이하는 구성원들에게 공지해주세요.<br>
-        단, 뒤에 여러 게임을 진행하려는 이유로 2시간보다 적은 시간으로 플레이하는 것은 <b>삼가해주시기 바랍니다.</b>
-      </div>
-      <button class="menu-item" style="margin-top:6px;" onclick="closeLolModal(); openZoom('lol.png')">
-        <span class="menu-body"><span class="menu-title">모집 예시 이미지 보기</span></span>
-      </button>
-    </div>
-    <button id="lol-modal-close" onclick="closeLolModal()">✕</button>
   </div>
 
   <!-- STEAM 게임 모집 안내 모달 -->
@@ -882,7 +865,7 @@
     }, { passive: true });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeLightbox(); closeTextModal(); closeReserveModal(); closeGroupModal(); closeSteamModal(); closeLolModal(); }
+      if (e.key === 'Escape') { closeLightbox(); closeTextModal(); closeReserveModal(); closeGroupModal(); closeSteamModal(); }
     });
 
     function openTextModal() {
@@ -902,16 +885,6 @@
 
     function closeReserveModal() {
       document.getElementById('reserve-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function openLolModal() {
-      document.getElementById('lol-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLolModal() {
-      document.getElementById('lol-modal').classList.remove('open');
       document.body.style.overflow = '';
     }
 
